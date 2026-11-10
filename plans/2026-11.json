@@ -1,0 +1,674 @@
+{
+  "schemaVersion": 2,
+  "planId": "forge-2026-11-v2",
+  "month": "2026-11",
+  "startDate": "2026-11-09",
+  "title": "9 November 2026 · Four-week strength + conditioning foundation",
+  "description": "Starts Monday 9 November. Three timed gym sessions (Mon/Wed/Fri) and two fixed runs (Tue/Sat). Build muscle, preserve running performance, improve mobility and support gradual fat loss.",
+  "schedule": [
+    {
+      "day": "Monday",
+      "type": "gym",
+      "sessionId": "A"
+    },
+    {
+      "day": "Tuesday",
+      "type": "run",
+      "note": "Easy conversational run, around 35–50 min. Keep effort easy; avoid speed work while adapting to gym load."
+    },
+    {
+      "day": "Wednesday",
+      "type": "gym",
+      "sessionId": "B"
+    },
+    {
+      "day": "Thursday",
+      "type": "recovery",
+      "note": "Optional 10–15 min controlled mobility or a light walk. No compulsory HIIT."
+    },
+    {
+      "day": "Friday",
+      "type": "gym",
+      "sessionId": "C",
+      "note": "Upper-body-biased gym session; protect legs for Saturday’s long run."
+    },
+    {
+      "day": "Saturday",
+      "type": "run",
+      "note": "Long easy run, initially roughly 60–80 min according to your current running plan. If excessively sore, reduce duration; avoid pushing pace."
+    },
+    {
+      "day": "Sunday",
+      "type": "rest",
+      "note": "Rest or light walk"
+    }
+  ],
+  "progression": [
+    {
+      "week": 1,
+      "label": "9–15 Nov · Familiarise",
+      "roundDelta": -1,
+      "conditioningRoundDelta": -1,
+      "intensity": "RPE 6–7 · establish starting weights and technique"
+    },
+    {
+      "week": 2,
+      "label": "16–22 Nov · Build volume",
+      "roundDelta": 0,
+      "conditioningRoundDelta": 0,
+      "intensity": "RPE 7 · keep 2–3 reps in reserve"
+    },
+    {
+      "week": 3,
+      "label": "23–29 Nov · Progress carefully",
+      "roundDelta": 0,
+      "conditioningRoundDelta": 0,
+      "intensity": "RPE 7–8 · add 2.5–5% load ONLY if full interval remains controlled"
+    },
+    {
+      "week": 4,
+      "label": "30 Nov–6 Dec · Consolidate",
+      "roundDelta": -1,
+      "conditioningRoundDelta": -1,
+      "intensity": "RPE 6–7 · lower sets and consolidate progress"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "A",
+      "title": "Full-body strength",
+      "tag": "MON / GYM A",
+      "focus": "Legs · back · chest · trunk",
+      "description": "Strength-biased circuits without rushing compound lifts. Keep approximately 2–3 good repetitions in reserve.",
+      "blocks": [
+        {
+          "title": "Dynamic warm-up",
+          "kind": "warmup",
+          "rounds": 1,
+          "stationTransitionSeconds": 20,
+          "restBetweenRoundsSeconds": 0,
+          "blockTransitionSeconds": 40,
+          "stations": [
+            {
+              "name": "Fast walk or easy cycle",
+              "seconds": 40,
+              "cue": "Gradually increase heart rate",
+              "alternative": ""
+            },
+            {
+              "name": "Hip hinge drill",
+              "seconds": 40,
+              "cue": "Push hips back, neutral spine",
+              "alternative": ""
+            },
+            {
+              "name": "Bodyweight squats",
+              "seconds": 40,
+              "cue": "Smooth comfortable depth",
+              "alternative": ""
+            },
+            {
+              "name": "Arm circles and shoulder rolls",
+              "seconds": 40,
+              "cue": "Move through pain-free range",
+              "alternative": ""
+            },
+            {
+              "name": "Alternating reverse lunges",
+              "seconds": 40,
+              "cue": "Controlled short step",
+              "alternative": ""
+            },
+            {
+              "name": "Standing trunk rotations",
+              "seconds": 40,
+              "cue": "Slow thoracic turns; do not twist through the lower back",
+              "alternative": ""
+            }
+          ]
+        },
+        {
+          "title": "Strength circuit 1 · push / pull",
+          "kind": "strength",
+          "rounds": 3,
+          "stationTransitionSeconds": 25,
+          "restBetweenRoundsSeconds": 85,
+          "blockTransitionSeconds": 35,
+          "stations": [
+            {
+              "name": "Leg press",
+              "seconds": 45,
+              "cue": "Controlled lower; smooth drive. Do not chase speed.",
+              "alternative": "Goblet squat"
+            },
+            {
+              "name": "Lat pulldown",
+              "seconds": 45,
+              "cue": "Elbows toward ribs; stay upright.",
+              "alternative": "Assisted pull-up"
+            }
+          ]
+        },
+        {
+          "title": "Strength circuit 2 · push / hinge",
+          "kind": "strength",
+          "rounds": 3,
+          "stationTransitionSeconds": 25,
+          "restBetweenRoundsSeconds": 85,
+          "blockTransitionSeconds": 35,
+          "stations": [
+            {
+              "name": "Dumbbell bench press",
+              "seconds": 45,
+              "cue": "Shoulders stable; maintain control.",
+              "alternative": "Chest-press machine"
+            },
+            {
+              "name": "Dumbbell Romanian deadlift",
+              "seconds": 45,
+              "cue": "Hinge at hips; neutral spine.",
+              "alternative": "Cable pull-through"
+            }
+          ]
+        },
+        {
+          "title": "Strength circuit 3 · row / single-leg",
+          "kind": "accessory",
+          "rounds": 3,
+          "stationTransitionSeconds": 25,
+          "restBetweenRoundsSeconds": 65,
+          "blockTransitionSeconds": 35,
+          "stations": [
+            {
+              "name": "Seated cable row",
+              "seconds": 40,
+              "cue": "Pause briefly with elbows by sides.",
+              "alternative": "Chest-supported row"
+            },
+            {
+              "name": "Alternating reverse lunges",
+              "seconds": 40,
+              "cue": "Switch legs evenly; hold support if needed.",
+              "alternative": "Low step-up"
+            }
+          ]
+        },
+        {
+          "title": "Controlled conditioning",
+          "kind": "conditioning",
+          "rounds": 3,
+          "stationTransitionSeconds": 20,
+          "restBetweenRoundsSeconds": 35,
+          "blockTransitionSeconds": 35,
+          "stations": [
+            {
+              "name": "Stationary bicycle · brisk",
+              "seconds": 35,
+              "cue": "RPE 7–8, not an all-out sprint.",
+              "alternative": ""
+            },
+            {
+              "name": "Dead bug",
+              "seconds": 35,
+              "cue": "Opposite arm and leg, slow and controlled.",
+              "alternative": ""
+            }
+          ]
+        },
+        {
+          "title": "Mobility and cooldown",
+          "kind": "mobility",
+          "rounds": 1,
+          "stationTransitionSeconds": 10,
+          "restBetweenRoundsSeconds": 0,
+          "blockTransitionSeconds": 0,
+          "stations": [
+            {
+              "name": "Half-kneeling hip flexor stretch",
+              "seconds": 40,
+              "cue": "20 seconds each side; easy tension",
+              "alternative": ""
+            },
+            {
+              "name": "Hamstring stretch",
+              "seconds": 40,
+              "cue": "20 seconds per side",
+              "alternative": ""
+            },
+            {
+              "name": "Doorway chest stretch",
+              "seconds": 40,
+              "cue": "20 seconds per side",
+              "alternative": ""
+            },
+            {
+              "name": "Calf stretch",
+              "seconds": 40,
+              "cue": "20 seconds per side",
+              "alternative": ""
+            },
+            {
+              "name": "Slow nasal breathing",
+              "seconds": 40,
+              "cue": "Let breathing settle",
+              "alternative": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "title": "Functional strength",
+      "tag": "WED / GYM B",
+      "focus": "Single-leg · posterior chain · shoulders · core",
+      "description": "Improve stability and movement quality while building muscle. Keep exertion controlled before Friday.",
+      "blocks": [
+        {
+          "title": "Dynamic warm-up",
+          "kind": "warmup",
+          "rounds": 1,
+          "stationTransitionSeconds": 20,
+          "restBetweenRoundsSeconds": 0,
+          "blockTransitionSeconds": 40,
+          "stations": [
+            {
+              "name": "Fast walk or easy cycle",
+              "seconds": 40,
+              "cue": "Gradually increase heart rate",
+              "alternative": ""
+            },
+            {
+              "name": "Hip hinge drill",
+              "seconds": 40,
+              "cue": "Push hips back, neutral spine",
+              "alternative": ""
+            },
+            {
+              "name": "Bodyweight squats",
+              "seconds": 40,
+              "cue": "Smooth comfortable depth",
+              "alternative": ""
+            },
+            {
+              "name": "Arm circles and shoulder rolls",
+              "seconds": 40,
+              "cue": "Move through pain-free range",
+              "alternative": ""
+            },
+            {
+              "name": "Alternating reverse lunges",
+              "seconds": 40,
+              "cue": "Controlled short step",
+              "alternative": ""
+            },
+            {
+              "name": "Standing trunk rotations",
+              "seconds": 40,
+              "cue": "Slow thoracic turns; do not twist through the lower back",
+              "alternative": ""
+            }
+          ]
+        },
+        {
+          "title": "Strength circuit 1 · legs / upper back",
+          "kind": "strength",
+          "rounds": 3,
+          "stationTransitionSeconds": 25,
+          "restBetweenRoundsSeconds": 85,
+          "blockTransitionSeconds": 35,
+          "stations": [
+            {
+              "name": "Alternating step-ups",
+              "seconds": 45,
+              "cue": "Alternate legs; control the descent.",
+              "alternative": "Supported reverse lunge"
+            },
+            {
+              "name": "Chest-supported row",
+              "seconds": 45,
+              "cue": "Avoid shrugging; elbows toward hips.",
+              "alternative": "Seated cable row"
+            }
+          ]
+        },
+        {
+          "title": "Strength circuit 2 · hips / chest",
+          "kind": "strength",
+          "rounds": 3,
+          "stationTransitionSeconds": 25,
+          "restBetweenRoundsSeconds": 85,
+          "blockTransitionSeconds": 35,
+          "stations": [
+            {
+              "name": "Hip thrust machine",
+              "seconds": 45,
+              "cue": "Pause at top; do not arch lower back.",
+              "alternative": "Glute bridge with dumbbell"
+            },
+            {
+              "name": "Incline dumbbell press",
+              "seconds": 45,
+              "cue": "Smooth shoulder-friendly range.",
+              "alternative": "Incline chest press machine"
+            }
+          ]
+        },
+        {
+          "title": "Strength circuit 3 · shoulders / hamstrings",
+          "kind": "accessory",
+          "rounds": 3,
+          "stationTransitionSeconds": 25,
+          "restBetweenRoundsSeconds": 65,
+          "blockTransitionSeconds": 35,
+          "stations": [
+            {
+              "name": "Seated shoulder press",
+              "seconds": 40,
+              "cue": "Neutral grip if comfortable.",
+              "alternative": "Machine shoulder press"
+            },
+            {
+              "name": "Seated leg curl",
+              "seconds": 40,
+              "cue": "Control the return.",
+              "alternative": "Standing cable leg curl"
+            }
+          ]
+        },
+        {
+          "title": "Core and carrying",
+          "kind": "accessory",
+          "rounds": 2,
+          "stationTransitionSeconds": 25,
+          "restBetweenRoundsSeconds": 65,
+          "blockTransitionSeconds": 35,
+          "stations": [
+            {
+              "name": "Farmer carry",
+              "seconds": 40,
+              "cue": "Braced torso; controlled steps.",
+              "alternative": "Suitcase carry, 20 seconds each side"
+            },
+            {
+              "name": "Pallof press",
+              "seconds": 40,
+              "cue": "20 seconds each side; resist rotation.",
+              "alternative": "Standing band anti-rotation press"
+            }
+          ]
+        },
+        {
+          "title": "Short aerobic finisher",
+          "kind": "conditioning",
+          "rounds": 3,
+          "stationTransitionSeconds": 20,
+          "restBetweenRoundsSeconds": 35,
+          "blockTransitionSeconds": 35,
+          "stations": [
+            {
+              "name": "Stationary bike · steady hard",
+              "seconds": 40,
+              "cue": "RPE 7; controlled breathing",
+              "alternative": ""
+            },
+            {
+              "name": "Standing calf raises",
+              "seconds": 40,
+              "cue": "Full pain-free range; pause at top",
+              "alternative": ""
+            }
+          ]
+        },
+        {
+          "title": "Mobility and cooldown",
+          "kind": "mobility",
+          "rounds": 1,
+          "stationTransitionSeconds": 10,
+          "restBetweenRoundsSeconds": 0,
+          "blockTransitionSeconds": 0,
+          "stations": [
+            {
+              "name": "Half-kneeling hip flexor stretch",
+              "seconds": 40,
+              "cue": "20 seconds each side; easy tension",
+              "alternative": ""
+            },
+            {
+              "name": "Hamstring stretch",
+              "seconds": 40,
+              "cue": "20 seconds per side",
+              "alternative": ""
+            },
+            {
+              "name": "Doorway chest stretch",
+              "seconds": 40,
+              "cue": "20 seconds per side",
+              "alternative": ""
+            },
+            {
+              "name": "Calf stretch",
+              "seconds": 40,
+              "cue": "20 seconds per side",
+              "alternative": ""
+            },
+            {
+              "name": "Slow nasal breathing",
+              "seconds": 40,
+              "cue": "Let breathing settle",
+              "alternative": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "title": "Upper-body strength + light lower-body",
+      "tag": "FRI / GYM C",
+      "focus": "Back · chest · shoulders · arms · light leg maintenance",
+      "description": "Upper-body biased timed circuits plus a low-impact finisher. Protect Saturday’s long run: light leg work, no leg failure or maximal cycling.",
+      "blocks": [
+        {
+          "title": "Dynamic warm-up",
+          "kind": "warmup",
+          "rounds": 1,
+          "stationTransitionSeconds": 20,
+          "restBetweenRoundsSeconds": 0,
+          "blockTransitionSeconds": 40,
+          "stations": [
+            {
+              "name": "Fast walk or easy cycle",
+              "seconds": 40,
+              "cue": "Gradually increase heart rate",
+              "alternative": ""
+            },
+            {
+              "name": "Hip hinge drill",
+              "seconds": 40,
+              "cue": "Push hips back, neutral spine",
+              "alternative": ""
+            },
+            {
+              "name": "Bodyweight squats",
+              "seconds": 40,
+              "cue": "Smooth comfortable depth",
+              "alternative": ""
+            },
+            {
+              "name": "Arm circles and shoulder rolls",
+              "seconds": 40,
+              "cue": "Move through pain-free range",
+              "alternative": ""
+            },
+            {
+              "name": "Alternating reverse lunges",
+              "seconds": 40,
+              "cue": "Controlled short step",
+              "alternative": ""
+            },
+            {
+              "name": "Standing trunk rotations",
+              "seconds": 40,
+              "cue": "Slow thoracic turns; do not twist through the lower back",
+              "alternative": ""
+            }
+          ]
+        },
+        {
+          "title": "Upper-body pull / light leg maintenance",
+          "kind": "strength",
+          "rounds": 3,
+          "stationTransitionSeconds": 25,
+          "restBetweenRoundsSeconds": 85,
+          "blockTransitionSeconds": 35,
+          "stations": [
+            {
+              "name": "Light leg press",
+              "seconds": 45,
+              "cue": "Smooth reps; RPE 5–6 and stop well short of failure before Saturday run.",
+              "alternative": "Goblet squat"
+            },
+            {
+              "name": "Lat pulldown or assisted pull-up",
+              "seconds": 45,
+              "cue": "Pause; avoid swinging.",
+              "alternative": ""
+            }
+          ]
+        },
+        {
+          "title": "Push / posterior chain activation",
+          "kind": "strength",
+          "rounds": 3,
+          "stationTransitionSeconds": 25,
+          "restBetweenRoundsSeconds": 85,
+          "blockTransitionSeconds": 35,
+          "stations": [
+            {
+              "name": "Machine chest press",
+              "seconds": 45,
+              "cue": "Full comfortable range.",
+              "alternative": "Dumbbell floor press"
+            },
+            {
+              "name": "Cable pull-through (light)",
+              "seconds": 45,
+              "cue": "Controlled hip hinge; avoid muscular failure ahead of Saturday.",
+              "alternative": "Light Romanian deadlift"
+            }
+          ]
+        },
+        {
+          "title": "Upper-body accessory circuit",
+          "kind": "accessory",
+          "rounds": 3,
+          "stationTransitionSeconds": 20,
+          "restBetweenRoundsSeconds": 65,
+          "blockTransitionSeconds": 35,
+          "stations": [
+            {
+              "name": "Dumbbell lateral raises",
+              "seconds": 40,
+              "cue": "Light, slow, no momentum.",
+              "alternative": ""
+            },
+            {
+              "name": "Cable face pull",
+              "seconds": 40,
+              "cue": "Rotate through upper back, avoid neck strain.",
+              "alternative": ""
+            },
+            {
+              "name": "Dumbbell biceps curl",
+              "seconds": 40,
+              "cue": "No swinging; control lowering.",
+              "alternative": ""
+            },
+            {
+              "name": "Rope triceps pressdown",
+              "seconds": 40,
+              "cue": "Elbows near sides.",
+              "alternative": ""
+            }
+          ]
+        },
+        {
+          "title": "Low-impact aerobic finish (optional if legs tired)",
+          "kind": "conditioning",
+          "rounds": 4,
+          "stationTransitionSeconds": 0,
+          "restBetweenRoundsSeconds": 0,
+          "blockTransitionSeconds": 35,
+          "stations": [
+            {
+              "name": "Stationary bike · moderate effort",
+              "seconds": 35,
+              "cue": "RPE 5–6: moderate aerobic effort, not a sprint.",
+              "alternative": ""
+            },
+            {
+              "name": "Bike · easy spin",
+              "seconds": 25,
+              "cue": "Recover while staying in motion",
+              "alternative": ""
+            }
+          ]
+        },
+        {
+          "title": "Mobility and cooldown",
+          "kind": "mobility",
+          "rounds": 1,
+          "stationTransitionSeconds": 10,
+          "restBetweenRoundsSeconds": 0,
+          "blockTransitionSeconds": 0,
+          "stations": [
+            {
+              "name": "Half-kneeling hip flexor stretch",
+              "seconds": 40,
+              "cue": "20 seconds each side; easy tension",
+              "alternative": ""
+            },
+            {
+              "name": "Hamstring stretch",
+              "seconds": 40,
+              "cue": "20 seconds per side",
+              "alternative": ""
+            },
+            {
+              "name": "Doorway chest stretch",
+              "seconds": 40,
+              "cue": "20 seconds per side",
+              "alternative": ""
+            },
+            {
+              "name": "Calf stretch",
+              "seconds": 40,
+              "cue": "20 seconds per side",
+              "alternative": ""
+            },
+            {
+              "name": "Slow nasal breathing",
+              "seconds": 40,
+              "cue": "Let breathing settle",
+              "alternative": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "rules": [
+    "Do not rush strength reps to fill time. Stop early if form deteriorates.",
+    "Work intervals are upper time limits, not mandates to keep lifting through fatigue.",
+    "Rest durations are programmed; move to the next exercise only after equipment is ready. Pause whenever necessary.",
+    "Four programme weeks run Monday–Sunday, beginning Monday 9 November 2026.",
+    "If equipment is occupied, use alternatives or pause during station changes."
+  ],
+  "sources": [
+    "ACSM 2026 resistance training position stand, PMID 41843416",
+    "Singer et al 2024 rest duration meta-analysis, PMID 39205815",
+    "UK CMO physical activity guidelines",
+    "2025 flexibility meta-analysis, PMID 39614059"
+  ]
+}

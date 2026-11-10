@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "latestMonth": "2026-11",
+  "plans": [
+    {
+      "month": "2026-11",
+      "file": "2026-11.json",
+      "sha256": "fef9bdee5ec04010f1cdb39d6c6fbcafe3aae31c96adda93fa2c373257751fee"
+    }
+  ]
+}
