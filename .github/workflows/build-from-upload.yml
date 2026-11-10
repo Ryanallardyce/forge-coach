@@ -1,0 +1,59 @@
+name: Build Forge Coach Android APK
+on:
+  push:
+    paths:
+      - 'Forge_Coach_Android_2_1_09_Nov_2026.zip'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Unpack Forge Coach source
+        run: |
+          test -f Forge_Coach_Android_2_1_09_Nov_2026.zip
+          mkdir -p extracted
+          unzip -q Forge_Coach_Android_2_1_09_Nov_2026.zip -d extracted
+          test -f extracted/forge-coach/app/build.gradle
+      - name: Configure Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Configure Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Configure Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+      - name: Validate plan and feed
+        working-directory: extracted/forge-coach
+        run: |
+          python3 scripts/validate_plan.py app/src/main/assets/default-plan.json
+          python3 scripts/test_feed.py
+      - name: Build debug APK
+        working-directory: extracted/forge-coach
+        run: gradle --no-daemon assembleDebug
+      - name: Upload phone installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: Forge-Coach-APK
+          path: extracted/forge-coach/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+      - name: Publish monthly plan feed
+        run: |
+          mkdir -p plans
+          cp extracted/forge-coach/plans/index.json plans/index.json
+          cp extracted/forge-coach/plans/2026-11.json plans/2026-11.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add plans/
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish November workout feed"
+            git push
+          fi
