@@ -4,6 +4,7 @@ on:
     paths:
       - 'Forge_Coach_Android_2_1_09_Nov_2026.zip'
       - 'ForgeCoach_App_Source_Fresh.zip'
+      - '.github/workflows/build-from-upload.yml'
   workflow_dispatch:
 
 permissions:
@@ -27,7 +28,12 @@ jobs:
           distribution: temurin
           java-version: '17'
       - name: Configure Android SDK
-        uses: android-actions/setup-android@v3
+        shell: bash
+        run: |
+          echo "Using Android SDK at $ANDROID_HOME"
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          if [ ! -x "$SDKMANAGER" ]; then SDKMANAGER="$(command -v sdkmanager)"; fi
+          "$SDKMANAGER" --install "platforms;android-35" "build-tools;35.0.0" "platform-tools"
       - name: Configure Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
