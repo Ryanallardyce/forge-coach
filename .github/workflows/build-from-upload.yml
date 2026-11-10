@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'Forge_Coach_Android_2_1_09_Nov_2026.zip'
+      - 'ForgeCoach_App_Source_Fresh.zip'
   workflow_dispatch:
 
 permissions:
@@ -16,9 +17,9 @@ jobs:
         uses: actions/checkout@v4
       - name: Unpack Forge Coach source
         run: |
-          test -f Forge_Coach_Android_2_1_09_Nov_2026.zip
+          test -f ForgeCoach_App_Source_Fresh.zip
           mkdir -p extracted
-          unzip -q Forge_Coach_Android_2_1_09_Nov_2026.zip -d extracted
+          unzip -q ForgeCoach_App_Source_Fresh.zip -d extracted
           test -f extracted/forge-coach/app/build.gradle
       - name: Configure Java
         uses: actions/setup-java@v4
