@@ -22,6 +22,12 @@ jobs:
           mkdir -p extracted
           unzip -q ForgeCoach_App_Source_Fresh.zip -d extracted
           test -f extracted/forge-coach/app/build.gradle
+      - name: Correct Java compatibility issues in initial source
+        run: |
+          FILE=extracted/forge-coach/app/src/main/java/uk/co/forgecoach/MainActivity.java
+          sed -i 's/b.setTextAllCaps(false);//; s/JSONObject day=schedule.getJSONObject(i);/JSONObject scheduleDay=schedule.getJSONObject(i);/; s/day.optString(/scheduleDay.optString(/g' "$FILE"
+          grep -q 'JSONObject scheduleDay' "$FILE"
+          ! grep -q 'setTextAllCaps(false)' "$FILE"
       - name: Configure Java
         uses: actions/setup-java@v4
         with:
