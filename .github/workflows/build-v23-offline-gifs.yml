@@ -1,0 +1,69 @@
+name: Build Forge Coach v2.3 APK
+
+on:
+  push:
+    paths:
+      - 'ForgeCoach_v23_Offline_Demos_FIXED.zip'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Unpack v2.3 source
+        run: |
+          test -f ForgeCoach_v23_Offline_Demos_FIXED.zip
+          mkdir -p extracted
+          unzip -q ForgeCoach_v23_Offline_Demos_FIXED.zip -d extracted
+          test -f extracted/forge-coach/app/build.gradle
+          grep -q "versionName '2.3'" extracted/forge-coach/app/build.gradle
+          test -f extracted/forge-coach/app/src/main/java/uk/co/forgecoach/GifView.java
+          test -f extracted/forge-coach/app/src/main/assets/gifs/machine_leg_press.gif
+
+      - name: Configure Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Configure Android SDK
+        shell: bash
+        run: |
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          if [ ! -x "$SDKMANAGER" ]; then SDKMANAGER="$(command -v sdkmanager)"; fi
+          "$SDKMANAGER" --install "platforms;android-35" "build-tools;35.0.0" "platform-tools"
+
+      - name: Configure Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+
+      - name: Validate workout plans
+        working-directory: extracted/forge-coach
+        run: |
+          python3 scripts/validate_plan.py app/src/main/assets/default-plan.json
+          python3 scripts/test_feed.py
+
+      - name: Build v2.3 Android debug APK
+        working-directory: extracted/forge-coach
+        run: gradle --no-daemon assembleDebug
+
+      - name: Publish APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Forge-Coach-v2.3-APK
+          path: extracted/forge-coach/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Installation safety reminder
+        run: |
+          echo "v2.3 debug APK is a separate GitHub build and may not match the previous app signing certificate."
+          echo "Before uninstalling an older Forge Coach version, export history via Share progress."
+          echo "v2.3 can restore that history from clipboard after a reinstall."
