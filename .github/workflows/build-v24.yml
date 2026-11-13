@@ -48,13 +48,30 @@ jobs:
           python3 scripts/test_feed.py
           python3 scripts/validate_visuals.py
 
-      - name: Build Android APK
+      - name: Decrypt private release signing key
+        env:
+          FORGE_COACH_SIGNING_PASSPHRASE: ${{ secrets.FORGE_COACH_SIGNING_PASSPHRASE }}
+        shell: bash
+        run: |
+          if [ -z "$FORGE_COACH_SIGNING_PASSPHRASE" ]; then
+            echo "::error::Add FORGE_COACH_SIGNING_PASSPHRASE as a repository Actions secret before building."
+            exit 1
+          fi
+          openssl enc -d -aes-256-cbc -pbkdf2 -iter 100000 \
+            -in extracted/forge-coach/signing/forge-coach-release.p12.enc \
+            -out extracted/forge-coach/signing/forge-coach-release.p12 \
+            -pass env:FORGE_COACH_SIGNING_PASSPHRASE
+          chmod 600 extracted/forge-coach/signing/forge-coach-release.p12
+
+      - name: Build release-signed Android APK
         working-directory: extracted/forge-coach
-        run: gradle --no-daemon assembleDebug
+        env:
+          FORGE_COACH_SIGNING_PASSPHRASE: ${{ secrets.FORGE_COACH_SIGNING_PASSPHRASE }}
+        run: gradle --no-daemon assembleRelease
 
       - name: Upload Forge Coach v2.4 installer
         uses: actions/upload-artifact@v4
         with:
           name: Forge-Coach-v2.4-APK
-          path: extracted/forge-coach/app/build/outputs/apk/debug/app-debug.apk
+          path: extracted/forge-coach/app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
