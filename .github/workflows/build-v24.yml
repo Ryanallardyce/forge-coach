@@ -69,9 +69,19 @@ jobs:
           FORGE_COACH_SIGNING_PASSPHRASE: ${{ secrets.FORGE_COACH_SIGNING_PASSPHRASE }}
         run: gradle --no-daemon assembleRelease
 
+      - name: Verify Android APK signing
+        shell: bash
+        run: |
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs extracted/forge-coach/app/build/outputs/apk/release/app-release.apk
+
       - name: Upload Forge Coach v2.4 installer
         uses: actions/upload-artifact@v4
         with:
           name: Forge-Coach-v2.4-APK
           path: extracted/forge-coach/app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
+
+      - name: Remove unencrypted signing key from runner
+        if: always()
+        shell: bash
+        run: rm -f extracted/forge-coach/signing/forge-coach-release.p12
