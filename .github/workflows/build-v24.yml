@@ -1,0 +1,60 @@
+name: Build Forge Coach v2.4 APK
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'ForgeCoach_v2.4_Station_Sets_Source.zip'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Unpack Forge Coach v2.4
+        run: |
+          test -f ForgeCoach_v2.4_Station_Sets_Source.zip
+          mkdir -p extracted
+          unzip -q ForgeCoach_v2.4_Station_Sets_Source.zip -d extracted
+          test -f extracted/forge-coach/app/build.gradle
+
+      - name: Configure Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Configure Android SDK
+        shell: bash
+        run: |
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          if [ ! -x "$SDKMANAGER" ]; then SDKMANAGER="$(command -v sdkmanager)"; fi
+          "$SDKMANAGER" --install "platforms;android-35" "build-tools;35.0.0" "platform-tools"
+
+      - name: Configure Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+
+      - name: Validate programme and offline demos
+        working-directory: extracted/forge-coach
+        run: |
+          python3 scripts/validate_plan.py app/src/main/assets/default-plan.json
+          python3 scripts/test_feed.py
+          python3 scripts/validate_visuals.py
+
+      - name: Build Android APK
+        working-directory: extracted/forge-coach
+        run: gradle --no-daemon assembleDebug
+
+      - name: Upload Forge Coach v2.4 installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: Forge-Coach-v2.4-APK
+          path: extracted/forge-coach/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
