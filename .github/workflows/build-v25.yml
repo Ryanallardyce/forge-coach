@@ -1,0 +1,87 @@
+name: Build Forge Coach v2.5 APK
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'ForgeCoach_v2.5_Visual_Guides_Source.zip'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Unpack Forge Coach v2.5
+        run: |
+          test -f ForgeCoach_v2.5_Visual_Guides_Source.zip
+          mkdir -p extracted
+          unzip -q ForgeCoach_v2.5_Visual_Guides_Source.zip -d extracted
+          test -f extracted/forge-coach/app/build.gradle
+
+      - name: Configure Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Configure Android SDK
+        shell: bash
+        run: |
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          if [ ! -x "$SDKMANAGER" ]; then SDKMANAGER="$(command -v sdkmanager)"; fi
+          "$SDKMANAGER" --install "platforms;android-35" "build-tools;35.0.0" "platform-tools"
+
+      - name: Configure Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+
+      - name: Validate programme and 38 offline visual guides
+        working-directory: extracted/forge-coach
+        run: |
+          python3 scripts/validate_plan.py app/src/main/assets/default-plan.json
+          python3 scripts/test_feed.py
+          python3 scripts/validate_visuals.py
+
+      - name: Decrypt private release signing key
+        env:
+          FORGE_COACH_SIGNING_PASSPHRASE: ${{ secrets.FORGE_COACH_SIGNING_PASSPHRASE }}
+        shell: bash
+        run: |
+          if [ -z "$FORGE_COACH_SIGNING_PASSPHRASE" ]; then
+            echo "::error::Add FORGE_COACH_SIGNING_PASSPHRASE as a repository Actions secret before building."
+            exit 1
+          fi
+          openssl enc -d -aes-256-cbc -pbkdf2 -iter 100000 \
+            -in extracted/forge-coach/signing/forge-coach-release.p12.enc \
+            -out extracted/forge-coach/signing/forge-coach-release.p12 \
+            -pass env:FORGE_COACH_SIGNING_PASSPHRASE
+          chmod 600 extracted/forge-coach/signing/forge-coach-release.p12
+
+      - name: Build release-signed Android APK
+        working-directory: extracted/forge-coach
+        env:
+          FORGE_COACH_SIGNING_PASSPHRASE: ${{ secrets.FORGE_COACH_SIGNING_PASSPHRASE }}
+        run: gradle --no-daemon assembleRelease
+
+      - name: Verify Android APK signing
+        shell: bash
+        run: |
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs extracted/forge-coach/app/build/outputs/apk/release/app-release.apk
+
+      - name: Upload Forge Coach v2.5 installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: Forge-Coach-v2.5-APK
+          path: extracted/forge-coach/app/build/outputs/apk/release/app-release.apk
+          if-no-files-found: error
+
+      - name: Remove unencrypted signing key from runner
+        if: always()
+        shell: bash
+        run: rm -f extracted/forge-coach/signing/forge-coach-release.p12
